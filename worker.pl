@@ -1,6 +1,8 @@
 use strict;
 use warnings;
 use utf8;
+use File::Basename;
+use lib dirname(__FILE__).'/lib';
 
 use Resque;
 

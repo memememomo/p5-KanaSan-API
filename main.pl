@@ -1,6 +1,8 @@
 use Mojolicious::Lite;
 use Resque;
 use Mojo::UserAgent;
+use File::Basename;
+use lib dirname(__FILE__).'/lib';
 
 app->plugin(
     config => {
