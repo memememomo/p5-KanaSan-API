@@ -1,0 +1,53 @@
+[% WRAPPER "layouts/default.tmpl" WITH active="index" %]
+
+<h2>パラメータ</h2>
+
+<table class="table table-bordered">
+<tr>
+  <th>パラメータ</th>
+  <th>説明</th>
+  <th>制限</th>
+  <th>初期値</th>
+</tr>
+<tr>
+   <td><code>text</code></td>
+   <td>読み上げるテキスト。エンコーディングはUTF-8</td>
+   <td>必須。200文字以内</td>
+   <td></td>
+</tr>
+<tr>
+   <td><code>v</code></td>
+   <td>
+    話者名。以下のいずれかを指定します。
+    <ul>
+      <li><code>f1</code>(女性声)</li>
+      <li><code>m1</code>(男性声)</li>
+    </ul>
+   </td>
+   <td></td>
+   <td><code>f1</code></td>
+</tr>
+<tr>
+   <td><code>s</code></td>
+   <td>話すスピード。整数値で指定します。</td>
+   <td>
+     <code>50</code>から<code>300</code>まで。
+   </td>
+   <td><code>100</code></td>
+</tr>
+</table>
+
+
+<h2>例:</h2>
+
+<pre>
+<code>
+$ curl "[% base_url %]/api"  \
+    -F "text=おはようございます。" \
+    -F "v=f1" \
+    -F "s=150"
+</code>
+</pre>
+
+
+[% END %]

@@ -1,5 +1,6 @@
 use Mojolicious::Lite;
 use Resque;
+use Mojo::UserAgent;
 
 app->plugin(
     config => {
@@ -15,6 +16,23 @@ app->helper(resque => sub {
     Resque->new(%{$self->config->{Resque}});
 });
 
+app->plugin('xslate_renderer', {
+    template_options => {
+        syntax => 'TTerse',
+    },
+});
+
+app->helper(_base_url => sub {
+    my $self = shift;
+    my $url = $self->req->url->to_abs;
+    return $url->scheme . '://' . $url->host . ':' . $url->port;
+});
+
+get '/' => sub {
+    my $self = shift;
+    $self->stash->{base_url} = $self->_base_url;
+    $self->render();
+} => 'index';
 
 post '/api' => sub {
     my $self = shift;
